@@ -357,4 +357,323 @@ public class PetriNet implements Cloneable, Serializable {
         return false;
     }
 
+    public static PetriNet CreateTaskGenerator2() throws ExceptionInvalidNetStructure, ExceptionInvalidTimeDelay {
+        ArrayList<PetriP> d_P = new ArrayList<>();
+        ArrayList<PetriT> d_T = new ArrayList<>();
+        ArrayList<ArcIn> d_In = new ArrayList<>();
+        ArrayList<ArcOut> d_Out = new ArrayList<>();
+        
+        d_P.add(new PetriP("P1",1));
+        d_P.add(new PetriP("P2",0));
+        
+        d_T.add(new PetriT("T1",40.0));
+        d_T.get(0).setDistribution("exp", d_T.get(0).getTimeServ());
+        d_T.get(0).setParamDeviation(0.0);
+        
+        d_In.add(new ArcIn(d_P.get(0),d_T.get(0),1));
+        
+        d_Out.add(new ArcOut(d_T.get(0),d_P.get(0),1));
+        d_Out.add(new ArcOut(d_T.get(0),d_P.get(1),1));
+        
+        PetriNet d_Net = new PetriNet("Task2",d_P,d_T,d_In,d_Out);
+        PetriP.initNext();
+        PetriT.initNext();
+        ArcIn.initNext();
+        ArcOut.initNext();
+
+        return d_Net;
+     }
+     public static PetriNet CreateProcessor1() throws ExceptionInvalidNetStructure, ExceptionInvalidTimeDelay {
+        ArrayList<PetriP> d_P = new ArrayList<>();
+        ArrayList<PetriT> d_T = new ArrayList<>();
+        ArrayList<ArcIn> d_In = new ArrayList<>();
+        ArrayList<ArcOut> d_Out = new ArrayList<>();
+        
+        d_P.add(new PetriP("P1",0));
+        d_P.add(new PetriP("P2",0));
+        d_P.add(new PetriP("P3",3));
+        d_P.add(new PetriP("P4",0));
+        d_P.add(new PetriP("P5",1));
+        d_P.add(new PetriP("P6",1));
+        d_P.add(new PetriP("P7",1));
+        
+        d_T.add(new PetriT("T1",14.0));
+        d_T.add(new PetriT("T2",14.0));
+        d_T.add(new PetriT("T3",14.0));
+        d_T.add(new PetriT("T4",60.0));
+        d_T.get(3).setDistribution("norm", d_T.get(3).getTimeServ());
+        d_T.get(3).setParamDeviation(10.0);
+        
+        d_In.add(new ArcIn(d_P.get(0),d_T.get(0),1));
+        d_In.add(new ArcIn(d_P.get(0),d_T.get(1),1));
+        d_In.add(new ArcIn(d_P.get(0),d_T.get(2),1));
+        d_In.add(new ArcIn(d_P.get(1),d_T.get(3),1));
+        d_In.add(new ArcIn(d_P.get(2),d_T.get(3),1));
+        d_In.add(new ArcIn(d_P.get(4),d_T.get(0),1));
+        d_In.add(new ArcIn(d_P.get(5),d_T.get(1),1));
+        d_In.add(new ArcIn(d_P.get(6),d_T.get(2),1));
+        
+        d_Out.add(new ArcOut(d_T.get(0),d_P.get(1),1));
+        d_Out.add(new ArcOut(d_T.get(1),d_P.get(1),1));
+        d_Out.add(new ArcOut(d_T.get(2),d_P.get(1),1));
+        d_Out.add(new ArcOut(d_T.get(3),d_P.get(2),1));
+        d_Out.add(new ArcOut(d_T.get(3),d_P.get(3),1));
+        d_Out.add(new ArcOut(d_T.get(0),d_P.get(4),1));
+        d_Out.add(new ArcOut(d_T.get(1),d_P.get(5),1));
+        d_Out.add(new ArcOut(d_T.get(2),d_P.get(6),1));
+        
+        PetriNet d_Net = new PetriNet("Processor1",d_P,d_T,d_In,d_Out);
+        PetriP.initNext();
+        PetriT.initNext();
+        ArcIn.initNext();
+        ArcOut.initNext();
+
+        return d_Net;
+     }
+     public static PetriNet CreateProcessor2() throws ExceptionInvalidNetStructure, ExceptionInvalidTimeDelay {
+        ArrayList<PetriP> d_P = new ArrayList<>();
+        ArrayList<PetriT> d_T = new ArrayList<>();
+        ArrayList<ArcIn> d_In = new ArrayList<>();
+        ArrayList<ArcOut> d_Out = new ArrayList<>();
+        
+        d_P.add(new PetriP("P1",0));
+        d_P.add(new PetriP("P2",0));
+        d_P.add(new PetriP("P3",3));
+        d_P.add(new PetriP("P4",0));
+        d_P.add(new PetriP("P5",1));
+        d_P.add(new PetriP("P6",1));
+        d_P.add(new PetriP("P7",1));
+        
+        d_T.add(new PetriT("T1",15.0));
+        d_T.add(new PetriT("T2",15.0));
+        d_T.add(new PetriT("T3",15.0));
+        d_T.add(new PetriT("T4",100.0));
+        d_T.get(3).setDistribution("exp", d_T.get(3).getTimeServ());
+        
+        d_In.add(new ArcIn(d_P.get(0),d_T.get(0),1));
+        d_In.add(new ArcIn(d_P.get(0),d_T.get(1),1));
+        d_In.add(new ArcIn(d_P.get(0),d_T.get(2),1));
+        d_In.add(new ArcIn(d_P.get(1),d_T.get(3),1));
+        d_In.add(new ArcIn(d_P.get(2),d_T.get(3),1));
+        d_In.add(new ArcIn(d_P.get(4),d_T.get(0),1));
+        d_In.add(new ArcIn(d_P.get(5),d_T.get(1),1));
+        d_In.add(new ArcIn(d_P.get(6),d_T.get(2),1));
+        
+        d_Out.add(new ArcOut(d_T.get(0),d_P.get(1),1));
+        d_Out.add(new ArcOut(d_T.get(1),d_P.get(1),1));
+        d_Out.add(new ArcOut(d_T.get(2),d_P.get(1),1));
+        d_Out.add(new ArcOut(d_T.get(3),d_P.get(2),1));
+        d_Out.add(new ArcOut(d_T.get(3),d_P.get(3),1));
+        d_Out.add(new ArcOut(d_T.get(0),d_P.get(4),1));
+        d_Out.add(new ArcOut(d_T.get(1),d_P.get(5),1));
+        d_Out.add(new ArcOut(d_T.get(2),d_P.get(6),1));
+        
+        PetriNet d_Net = new PetriNet("Processor2",d_P,d_T,d_In,d_Out);
+        PetriP.initNext();
+        PetriT.initNext();
+        ArcIn.initNext();
+        ArcOut.initNext();
+
+        return d_Net;
+     }
+
+     public static PetriNet CreateStorage() throws ExceptionInvalidNetStructure, ExceptionInvalidTimeDelay {
+        ArrayList<PetriP> d_P = new ArrayList<>();
+        ArrayList<PetriT> d_T = new ArrayList<>();
+        ArrayList<ArcIn> d_In = new ArrayList<>();
+        ArrayList<ArcOut> d_Out = new ArrayList<>();
+        
+        d_P.add(new PetriP("P1",0));
+        d_P.add(new PetriP("P2",0));
+        d_P.add(new PetriP("P3",1));
+        d_P.add(new PetriP("P4",1));
+        d_P.add(new PetriP("P5",1));
+        
+        d_T.add(new PetriT("T1",13.0));
+        d_T.add(new PetriT("T2",13.0));
+        d_T.add(new PetriT("T3",13.0));
+        
+        d_In.add(new ArcIn(d_P.get(0),d_T.get(0),1));
+        d_In.add(new ArcIn(d_P.get(0),d_T.get(1),1));
+        d_In.add(new ArcIn(d_P.get(0),d_T.get(2),1));
+        d_In.add(new ArcIn(d_P.get(2),d_T.get(0),1));
+        d_In.add(new ArcIn(d_P.get(3),d_T.get(1),1));
+        d_In.add(new ArcIn(d_P.get(4),d_T.get(2),1));
+        
+        d_Out.add(new ArcOut(d_T.get(0),d_P.get(2),1));
+        d_Out.add(new ArcOut(d_T.get(1),d_P.get(3),1));
+        d_Out.add(new ArcOut(d_T.get(2),d_P.get(4),1));
+        d_Out.add(new ArcOut(d_T.get(0),d_P.get(1),1));
+        d_Out.add(new ArcOut(d_T.get(1),d_P.get(1),1));
+        d_Out.add(new ArcOut(d_T.get(2),d_P.get(1),1));
+        
+        PetriNet d_Net = new PetriNet("Storage",d_P,d_T,d_In,d_Out);
+        PetriP.initNext();
+        PetriT.initNext();
+        ArcIn.initNext();
+        ArcOut.initNext();
+
+        return d_Net;
+     }
+
+     public static PetriNet CreateProcessor21() throws ExceptionInvalidNetStructure, ExceptionInvalidTimeDelay {
+        ArrayList<PetriP> d_P = new ArrayList<>();
+        ArrayList<PetriT> d_T = new ArrayList<>();
+        ArrayList<ArcIn> d_In = new ArrayList<>();
+        ArrayList<ArcOut> d_Out = new ArrayList<>();
+        
+        d_P.add(new PetriP("P1",0));
+        d_P.add(new PetriP("P2",0));
+        d_P.add(new PetriP("P3",3));
+        d_P.add(new PetriP("P4",0));
+        d_P.add(new PetriP("P5",1));
+        d_P.add(new PetriP("P6",1));
+        d_P.add(new PetriP("P7",1));
+        
+        d_T.add(new PetriT("T1",14.0));
+        d_T.add(new PetriT("T2",14.0));
+        d_T.add(new PetriT("T3",14.0));
+        d_T.add(new PetriT("T4",60.0));
+        d_T.get(3).setDistribution("norm", d_T.get(3).getTimeServ());
+        d_T.get(3).setParamDeviation(10.0);
+        
+        d_In.add(new ArcIn(d_P.get(0),d_T.get(0),1));
+        d_In.add(new ArcIn(d_P.get(0),d_T.get(1),1));
+        d_In.add(new ArcIn(d_P.get(0),d_T.get(2),1));
+        d_In.add(new ArcIn(d_P.get(1),d_T.get(3),1));
+        d_In.add(new ArcIn(d_P.get(2),d_T.get(3),1));
+        d_In.add(new ArcIn(d_P.get(4),d_T.get(0),1));
+        d_In.add(new ArcIn(d_P.get(4),d_T.get(1),1));
+        d_In.add(new ArcIn(d_P.get(4),d_T.get(2),1));
+        d_In.add(new ArcIn(d_P.get(5),d_T.get(2),1));
+        d_In.add(new ArcIn(d_P.get(5),d_T.get(1),1));
+        d_In.add(new ArcIn(d_P.get(5),d_T.get(0),1));
+        d_In.add(new ArcIn(d_P.get(6),d_T.get(2),1));
+        d_In.add(new ArcIn(d_P.get(6),d_T.get(1),1));
+        d_In.add(new ArcIn(d_P.get(6),d_T.get(0),1));
+        
+        d_Out.add(new ArcOut(d_T.get(0),d_P.get(1),1));
+        d_Out.add(new ArcOut(d_T.get(1),d_P.get(1),1));
+        d_Out.add(new ArcOut(d_T.get(2),d_P.get(1),1));
+        d_Out.add(new ArcOut(d_T.get(3),d_P.get(2),1));
+        d_Out.add(new ArcOut(d_T.get(3),d_P.get(3),1));
+        d_Out.add(new ArcOut(d_T.get(0),d_P.get(4),1));
+        d_Out.add(new ArcOut(d_T.get(1),d_P.get(4),1));
+        d_Out.add(new ArcOut(d_T.get(2),d_P.get(4),1));
+        d_Out.add(new ArcOut(d_T.get(0),d_P.get(5),1));
+        d_Out.add(new ArcOut(d_T.get(1),d_P.get(5),1));
+        d_Out.add(new ArcOut(d_T.get(2),d_P.get(5),1));
+        d_Out.add(new ArcOut(d_T.get(0),d_P.get(6),1));
+        d_Out.add(new ArcOut(d_T.get(1),d_P.get(6),1));
+        d_Out.add(new ArcOut(d_T.get(2),d_P.get(6),1));
+        
+        PetriNet d_Net = new PetriNet("Processor21",d_P,d_T,d_In,d_Out);
+        PetriP.initNext();
+        PetriT.initNext();
+        ArcIn.initNext();
+        ArcOut.initNext();
+
+        return d_Net;
+     }
+     public static PetriNet CreateProcessor22() throws ExceptionInvalidNetStructure, ExceptionInvalidTimeDelay {
+        ArrayList<PetriP> d_P = new ArrayList<>();
+        ArrayList<PetriT> d_T = new ArrayList<>();
+        ArrayList<ArcIn> d_In = new ArrayList<>();
+        ArrayList<ArcOut> d_Out = new ArrayList<>();
+        
+        d_P.add(new PetriP("P1",0));
+        d_P.add(new PetriP("P2",0));
+        d_P.add(new PetriP("P3",3));
+        d_P.add(new PetriP("P4",0));
+        d_P.add(new PetriP("P5",1));
+        d_P.add(new PetriP("P6",1));
+        d_P.add(new PetriP("P7",1));
+        
+        d_T.add(new PetriT("T1",15.0));
+        d_T.add(new PetriT("T2",15.0));
+        d_T.add(new PetriT("T3",15.0));
+        d_T.add(new PetriT("T4",100.0));
+        d_T.get(3).setDistribution("exp", d_T.get(3).getTimeServ());
+        
+        d_In.add(new ArcIn(d_P.get(0),d_T.get(0),1));
+        d_In.add(new ArcIn(d_P.get(0),d_T.get(1),1));
+        d_In.add(new ArcIn(d_P.get(0),d_T.get(2),1));
+        d_In.add(new ArcIn(d_P.get(1),d_T.get(3),1));
+        d_In.add(new ArcIn(d_P.get(2),d_T.get(3),1));
+        d_In.add(new ArcIn(d_P.get(4),d_T.get(0),1));
+        d_In.add(new ArcIn(d_P.get(4),d_T.get(1),1));
+        d_In.add(new ArcIn(d_P.get(4),d_T.get(2),1));
+        d_In.add(new ArcIn(d_P.get(5),d_T.get(2),1));
+        d_In.add(new ArcIn(d_P.get(5),d_T.get(1),1));
+        d_In.add(new ArcIn(d_P.get(5),d_T.get(0),1));
+        d_In.add(new ArcIn(d_P.get(6),d_T.get(2),1));
+        d_In.add(new ArcIn(d_P.get(6),d_T.get(1),1));
+        d_In.add(new ArcIn(d_P.get(6),d_T.get(0),1));
+        
+        d_Out.add(new ArcOut(d_T.get(0),d_P.get(1),1));
+        d_Out.add(new ArcOut(d_T.get(1),d_P.get(1),1));
+        d_Out.add(new ArcOut(d_T.get(2),d_P.get(1),1));
+        d_Out.add(new ArcOut(d_T.get(3),d_P.get(2),1));
+        d_Out.add(new ArcOut(d_T.get(3),d_P.get(3),1));
+        d_Out.add(new ArcOut(d_T.get(0),d_P.get(4),1));
+        d_Out.add(new ArcOut(d_T.get(1),d_P.get(4),1));
+        d_Out.add(new ArcOut(d_T.get(2),d_P.get(4),1));
+        d_Out.add(new ArcOut(d_T.get(0),d_P.get(5),1));
+        d_Out.add(new ArcOut(d_T.get(1),d_P.get(5),1));
+        d_Out.add(new ArcOut(d_T.get(2),d_P.get(5),1));
+        d_Out.add(new ArcOut(d_T.get(0),d_P.get(6),1));
+        d_Out.add(new ArcOut(d_T.get(1),d_P.get(6),1));
+        d_Out.add(new ArcOut(d_T.get(2),d_P.get(6),1));
+        
+        PetriNet d_Net = new PetriNet("Processor22",d_P,d_T,d_In,d_Out);
+        PetriP.initNext();
+        PetriT.initNext();
+        ArcIn.initNext();
+        ArcOut.initNext();
+
+        return d_Net;
+     }
+
+     public static PetriNet CreateStorage2() throws ExceptionInvalidNetStructure, ExceptionInvalidTimeDelay {
+        ArrayList<PetriP> d_P = new ArrayList<>();
+        ArrayList<PetriT> d_T = new ArrayList<>();
+        ArrayList<ArcIn> d_In = new ArrayList<>();
+        ArrayList<ArcOut> d_Out = new ArrayList<>();
+        
+        d_P.add(new PetriP("P1",0));
+        d_P.add(new PetriP("P2",0));
+        d_P.add(new PetriP("P3",1));
+        d_P.add(new PetriP("P4",1));
+        d_P.add(new PetriP("P5",1));
+        
+        d_T.add(new PetriT("T1",13.0));
+        d_T.add(new PetriT("T2",13.0));
+        d_T.add(new PetriT("T3",13.0));
+        
+        d_In.add(new ArcIn(d_P.get(0),d_T.get(0),1));
+        d_In.add(new ArcIn(d_P.get(0),d_T.get(1),1));
+        d_In.add(new ArcIn(d_P.get(0),d_T.get(2),1));
+        d_In.add(new ArcIn(d_P.get(2),d_T.get(0),1));
+        d_In.add(new ArcIn(d_P.get(3),d_T.get(1),1));
+        d_In.add(new ArcIn(d_P.get(4),d_T.get(2),1));
+        d_In.add(new ArcIn(d_P.get(2),d_T.get(1),1));
+        d_In.add(new ArcIn(d_P.get(2),d_T.get(2),1));
+        
+        d_Out.add(new ArcOut(d_T.get(0),d_P.get(2),1));
+        d_Out.add(new ArcOut(d_T.get(1),d_P.get(3),1));
+        d_Out.add(new ArcOut(d_T.get(2),d_P.get(4),1));
+        d_Out.add(new ArcOut(d_T.get(0),d_P.get(1),1));
+        d_Out.add(new ArcOut(d_T.get(1),d_P.get(1),1));
+        d_Out.add(new ArcOut(d_T.get(2),d_P.get(1),1));
+        d_Out.add(new ArcOut(d_T.get(1),d_P.get(2),1));
+        d_Out.add(new ArcOut(d_T.get(2),d_P.get(2),1));
+        
+        PetriNet d_Net = new PetriNet("Storage2",d_P,d_T,d_In,d_Out);
+        PetriP.initNext();
+        PetriT.initNext();
+        ArcIn.initNext();
+        ArcOut.initNext();
+
+        return d_Net;
+     }
 }
