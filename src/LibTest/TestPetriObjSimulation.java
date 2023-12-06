@@ -77,8 +77,6 @@ public class TestPetriObjSimulation {  //Результати співпадаю
              
       } 
       
-     // метод для конструювання моделі масового обслуговування з 4 СМО 
-      
       public static PetriObjModel getModel() throws ExceptionInvalidTimeDelay, ExceptionInvalidNetStructure{
           ArrayList<PetriSim> list = new ArrayList<>();
           list.add(new PetriSim(NetLibrary.CreateNetGenerator(2.0)));
@@ -87,9 +85,6 @@ public class TestPetriObjSimulation {  //Результати співпадаю
           list.add(new PetriSim(NetLibrary.CreateNetSMOwithoutQueue(1, 0.4,"Third")));
           list.add(new PetriSim(NetLibrary.CreateNetSMOwithoutQueue(2, 0.1,"Forth")));
           list.add(new PetriSim(NetLibrary.CreateNetFork(0.15, 0.13, 0.3)));
-      //перевірка зв'язків
-     //     System.out.println(list.get(0).getNet().getListP()[1].getName() + " == " + list.get(1).getNet().getListP()[0].getName());
-     //     System.out.println(list.get(1).getNet().getListP()[2].getName() + " == " + list.get(5).getNet().getListP()[0].getName());
 
           list.get(0).getNet().getListP()[1] = list.get(1).getNet().getListP()[0]; //gen = > SMO1
           list.get(1).getNet().getListP()[2] = list.get(5).getNet().getListP()[0]; //SMO1 = > fork
@@ -99,8 +94,8 @@ public class TestPetriObjSimulation {  //Результати співпадаю
           list.get(5).getNet().getListP()[3] = list.get(4).getNet().getListP()[0]; //fork =>SMO4
 
           list.get(2).getNet().getListP()[2] = list.get(1).getNet().getListP()[0]; //SMO2 => SMO1
-          list.get(3).getNet().getListP()[2] = list.get(1).getNet().getListP()[0];//SMO3 => SMO1
-          list.get(4).getNet().getListP()[2] = list.get(1).getNet().getListP()[0];//SMO4 => SMO1
+          list.get(3).getNet().getListP()[2] = list.get(1).getNet().getListP()[0]; //SMO3 => SMO1
+          list.get(4).getNet().getListP()[2] = list.get(1).getNet().getListP()[0]; //SMO4 => SMO1
 
           PetriObjModel model = new PetriObjModel(list);
           return model;

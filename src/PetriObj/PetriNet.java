@@ -676,4 +676,177 @@ public class PetriNet implements Cloneable, Serializable {
 
         return d_Net;
      }
+     
+     public static PetriNet CreateBusStop() throws ExceptionInvalidNetStructure, ExceptionInvalidTimeDelay {
+        ArrayList<PetriP> d_P = new ArrayList<>();
+        ArrayList<PetriT> d_T = new ArrayList<>();
+        ArrayList<ArcIn> d_In = new ArrayList<>();
+        ArrayList<ArcOut> d_Out = new ArrayList<>();
+        
+        d_P.add(new PetriP("P1",1));
+        d_P.add(new PetriP("P2",0));
+        d_P.add(new PetriP("P3",0));
+        d_P.add(new PetriP("P4",0));
+        d_P.add(new PetriP("Counter",0));
+        
+        d_T.add(new PetriT("T1",0.5));
+        d_T.get(0).setDistribution("unif", d_T.get(0).getTimeServ());
+        d_T.get(0).setParamDeviation(0.2);
+        d_T.add(new PetriT("T2",0.0));
+        d_T.add(new PetriT("T3",0.0));
+        d_T.get(2).setPriority(1);
+        
+        d_In.add(new ArcIn(d_P.get(0),d_T.get(0),1));
+        d_In.add(new ArcIn(d_P.get(1),d_T.get(1),1));
+        d_In.add(new ArcIn(d_P.get(1),d_T.get(2),1));
+        d_In.add(new ArcIn(d_P.get(2),d_T.get(2),30));
+        d_In.get(3).setInf(true);
+        
+        d_Out.add(new ArcOut(d_T.get(0),d_P.get(0),1));
+        d_Out.add(new ArcOut(d_T.get(0),d_P.get(1),1));
+        d_Out.add(new ArcOut(d_T.get(1),d_P.get(2),1));
+        d_Out.add(new ArcOut(d_T.get(2),d_P.get(3),1));
+        d_Out.add(new ArcOut(d_T.get(1),d_P.get(4),1));
+        
+        PetriNet d_Net = new PetriNet("BusStop",d_P,d_T,d_In,d_Out);
+        PetriP.initNext();
+        PetriT.initNext();
+        ArcIn.initNext();
+        ArcOut.initNext();
+
+        return d_Net;
+     }
+     public static PetriNet CreateBusA(int seatQuantity) throws ExceptionInvalidNetStructure, ExceptionInvalidTimeDelay {
+        ArrayList<PetriP> d_P = new ArrayList<>();
+        ArrayList<PetriT> d_T = new ArrayList<>();
+        ArrayList<ArcIn> d_In = new ArrayList<>();
+        ArrayList<ArcOut> d_Out = new ArrayList<>();
+        
+        d_P.add(new PetriP("P1",0));
+        d_P.add(new PetriP("P2",0));
+        d_P.add(new PetriP("P3",0));
+        d_P.add(new PetriP("P4",1));
+        d_P.add(new PetriP("P5",0));
+        d_P.add(new PetriP("P6",0));
+        d_P.add(new PetriP("P7",0));
+        d_P.add(new PetriP("P8",0));
+        d_P.add(new PetriP("P9",0));
+        d_P.add(new PetriP("P10",0));
+        
+        d_T.add(new PetriT("T1",0.0));
+        d_T.get(0).setPriority(1);
+        d_T.add(new PetriT("T2",20.0));
+        d_T.get(1).setDistribution("unif", d_T.get(1).getTimeServ());
+        d_T.get(1).setParamDeviation(5.0);
+        d_T.add(new PetriT("T3",5.0));
+        d_T.get(2).setDistribution("unif", d_T.get(2).getTimeServ());
+        d_T.get(2).setParamDeviation(1.0);
+        d_T.add(new PetriT("T4",5.0));
+        d_T.get(3).setDistribution("unif", d_T.get(3).getTimeServ());
+        d_T.get(3).setParamDeviation(1.0);
+        d_T.add(new PetriT("T5",20.0));
+        d_T.get(4).setDistribution("unif", d_T.get(4).getTimeServ());
+        d_T.get(4).setParamDeviation(5.0);
+        d_T.add(new PetriT("T6",0.0));
+        d_T.get(5).setPriority(1);
+        d_T.add(new PetriT("T7",0.0));
+        
+        d_In.add(new ArcIn(d_P.get(0),d_T.get(0),1));
+        d_In.add(new ArcIn(d_P.get(1),d_T.get(1),seatQuantity));
+        d_In.add(new ArcIn(d_P.get(2),d_T.get(2),1));
+        d_In.add(new ArcIn(d_P.get(8),d_T.get(5),1));
+        d_In.add(new ArcIn(d_P.get(7),d_T.get(6),1));
+        d_In.add(new ArcIn(d_P.get(3),d_T.get(0),1));
+        d_In.get(5).setInf(true);
+        d_In.add(new ArcIn(d_P.get(3),d_T.get(1),1));
+        d_In.add(new ArcIn(d_P.get(6),d_T.get(5),1));
+        d_In.get(7).setInf(true);
+        d_In.add(new ArcIn(d_P.get(6),d_T.get(4),1));
+        d_In.add(new ArcIn(d_P.get(5),d_T.get(4),seatQuantity));
+        d_In.add(new ArcIn(d_P.get(4),d_T.get(3),1));
+        
+        d_Out.add(new ArcOut(d_T.get(0),d_P.get(1),1));
+        d_Out.add(new ArcOut(d_T.get(1),d_P.get(2),1));
+        d_Out.add(new ArcOut(d_T.get(6),d_P.get(9),seatQuantity*20));
+        d_Out.add(new ArcOut(d_T.get(3),d_P.get(3),1));
+        d_Out.add(new ArcOut(d_T.get(2),d_P.get(6),1));
+        d_Out.add(new ArcOut(d_T.get(5),d_P.get(5),1));
+        d_Out.add(new ArcOut(d_T.get(4),d_P.get(4),1));
+        d_Out.add(new ArcOut(d_T.get(3),d_P.get(7),1));
+        d_Out.add(new ArcOut(d_T.get(2),d_P.get(7),1));
+        
+        PetriNet d_Net = new PetriNet("BusA",d_P,d_T,d_In,d_Out);
+        PetriP.initNext();
+        PetriT.initNext();
+        ArcIn.initNext();
+        ArcOut.initNext();
+
+        return d_Net;
+     }
+    public static PetriNet CreateBusB(int seatQuantity) throws ExceptionInvalidNetStructure, ExceptionInvalidTimeDelay {
+       ArrayList<PetriP> d_P = new ArrayList<>();
+       ArrayList<PetriT> d_T = new ArrayList<>();
+       ArrayList<ArcIn> d_In = new ArrayList<>();
+       ArrayList<ArcOut> d_Out = new ArrayList<>();
+       
+       d_P.add(new PetriP("P1",0));
+       d_P.add(new PetriP("P2",0));
+       d_P.add(new PetriP("P3",0));
+       d_P.add(new PetriP("P4",1));
+       d_P.add(new PetriP("P5",0));
+       d_P.add(new PetriP("P6",0));
+       d_P.add(new PetriP("P7",0));
+       d_P.add(new PetriP("P8",0));
+       d_P.add(new PetriP("P9",0));
+       d_P.add(new PetriP("P10",0));
+       
+       d_T.add(new PetriT("T1",0.0));
+       d_T.add(new PetriT("T2",30.0));
+       d_T.get(1).setDistribution("unif", d_T.get(1).getTimeServ());
+       d_T.get(1).setParamDeviation(5.0);
+       d_T.add(new PetriT("T3",5.0));
+       d_T.get(2).setDistribution("unif", d_T.get(2).getTimeServ());
+       d_T.get(2).setParamDeviation(1.0);
+       d_T.add(new PetriT("T4",5.0));
+       d_T.get(3).setDistribution("unif", d_T.get(3).getTimeServ());
+       d_T.get(3).setParamDeviation(1.0);
+       d_T.add(new PetriT("T5",30.0));
+       d_T.get(4).setDistribution("unif", d_T.get(4).getTimeServ());
+       d_T.get(4).setParamDeviation(5.0);
+       d_T.add(new PetriT("T6",0.0));
+       d_T.add(new PetriT("T7",0.0));
+       
+       d_In.add(new ArcIn(d_P.get(0),d_T.get(0),1));
+       d_In.add(new ArcIn(d_P.get(1),d_T.get(1),seatQuantity));
+       d_In.add(new ArcIn(d_P.get(2),d_T.get(2),1));
+       d_In.add(new ArcIn(d_P.get(8),d_T.get(5),1));
+       d_In.add(new ArcIn(d_P.get(7),d_T.get(6),1));
+       d_In.add(new ArcIn(d_P.get(3),d_T.get(0),1));
+       d_In.get(5).setInf(true);
+       d_In.add(new ArcIn(d_P.get(3),d_T.get(1),1));
+       d_In.add(new ArcIn(d_P.get(6),d_T.get(5),1));
+       d_In.get(7).setInf(true);
+       d_In.add(new ArcIn(d_P.get(6),d_T.get(4),1));
+       d_In.add(new ArcIn(d_P.get(5),d_T.get(4),seatQuantity));
+       d_In.add(new ArcIn(d_P.get(4),d_T.get(3),1));
+       
+       d_Out.add(new ArcOut(d_T.get(0),d_P.get(1),1));
+       d_Out.add(new ArcOut(d_T.get(1),d_P.get(2),1));
+       d_Out.add(new ArcOut(d_T.get(6),d_P.get(9),seatQuantity*20));
+       d_Out.add(new ArcOut(d_T.get(3),d_P.get(3),1));
+       d_Out.add(new ArcOut(d_T.get(2),d_P.get(6),1));
+       d_Out.add(new ArcOut(d_T.get(5),d_P.get(5),1));
+       d_Out.add(new ArcOut(d_T.get(4),d_P.get(4),1));
+       d_Out.add(new ArcOut(d_T.get(3),d_P.get(7),1));
+       d_Out.add(new ArcOut(d_T.get(2),d_P.get(7),1));
+       
+       PetriNet d_Net = new PetriNet("BusA",d_P,d_T,d_In,d_Out);
+       PetriP.initNext();
+       PetriT.initNext();
+       ArcIn.initNext();
+       ArcOut.initNext();
+
+       return d_Net;
+    }
+
 }

@@ -6,7 +6,7 @@ import PetriObj.*;
 import java.util.ArrayList;
 
 public class Task2 {
-        private static int time = 1000;
+    private static int time = 1000;
     
     public static void main(String[] args) throws ExceptionInvalidTimeDelay, ExceptionInvalidNetStructure {
         double time = 1000;
