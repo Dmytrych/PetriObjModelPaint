@@ -688,6 +688,7 @@ public class PetriNet implements Cloneable, Serializable {
         d_P.add(new PetriP("P3",0));
         d_P.add(new PetriP("P4",0));
         d_P.add(new PetriP("Counter",0));
+        d_P.add(new PetriP("Total produced",0));
         
         d_T.add(new PetriT("T1",0.5));
         d_T.get(0).setDistribution("unif", d_T.get(0).getTimeServ());
@@ -707,6 +708,7 @@ public class PetriNet implements Cloneable, Serializable {
         d_Out.add(new ArcOut(d_T.get(1),d_P.get(2),1));
         d_Out.add(new ArcOut(d_T.get(2),d_P.get(3),1));
         d_Out.add(new ArcOut(d_T.get(1),d_P.get(4),1));
+        d_Out.add(new ArcOut(d_T.get(0),d_P.get(5),1));
         
         PetriNet d_Net = new PetriNet("BusStop",d_P,d_T,d_In,d_Out);
         PetriP.initNext();

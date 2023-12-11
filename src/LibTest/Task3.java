@@ -21,9 +21,9 @@ public class Task3 {
             list.add(new PetriSim(PetriNet.CreateBusB(i)));
 
             list.get(2).getNet().getListP()[0] = list.get(0).getNet().getListP()[2];
-            list.get(3).getNet().getListP()[8] = list.get(0).getNet().getListP()[2];
+            list.get(3).getNet().getListP()[0] = list.get(0).getNet().getListP()[2];
             list.get(2).getNet().getListP()[8] = list.get(1).getNet().getListP()[2];
-            list.get(3).getNet().getListP()[9] = list.get(1).getNet().getListP()[2];
+            list.get(3).getNet().getListP()[8] = list.get(1).getNet().getListP()[2];
 
             PetriObjModel model = new PetriObjModel(list);
             model.setIsProtokol(false);
@@ -35,6 +35,7 @@ public class Task3 {
             busB = model.getListObj().get(3).getListPositionsForStatistica();
             
             int lost = queue1.get(3).getMark() + queue2.get(3).getMark();
+            int totalProduced = queue1.get(5).getMark() + queue2.get(5).getMark();
             double avgQueue = (queue1.get(2).getMean() + queue2.get(2).getMean()) / 2;
             double totalQueueProcessed = (queue1.get(4).getMark() + queue2.get(4).getMark()) / 2;
 
